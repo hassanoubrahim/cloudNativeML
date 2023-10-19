@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Home page</title>
+
+  <script src="https://kit.fontawesome.com/47101d2035.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+
+  <style>
+    .center {
+      position: absolute;
+      text-align: center;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: rgb(230, 239, 245);
+    }
+    .form {
+      text-align: left;
+    }
+  </style>
+</head>
+
+
+<body class="center">
+  <h1 style="color:rgb(44, 44, 90); font-weight: 700;">
+    <i class=""></i> Pima Indians Diabetes Prediction.
+  </h1>
+
+  <p style="color:rgb(51, 51, 83); font-weight: 700;">
+    
+    {% if res == 1 %}
+        prediction : <h1 style="color: red; font-weight: 900;">Sick</h1>
+    {% elif res == 0 %}
+        prediction : <h1 style="color: green; font-weight: 900;">Not Sick</h1>
+    {%else %}
+
+    {% endif %}
+
+  </p>
+
+<h1>Enter Data</h1>
+    <form action="/api/v1/project1/predict" method="GET">
+      <div class="form-group">
+        <label class='form' for="preg">Pregnancies:</label>
+        <input type="number" step="0.01" id="preg" name="preg" required value="{{data['preg'] if data }}"><br><br>
+      </div>
+      <div>
+        <label for="plas">Plasma Glucose:</label>
+        <input type="number" step="0.01" id="plas" name="plas" required value="{{data['plas'] if data }}"><br><br>
+      </div>
+      <div>
+        <label for="pres">Blood Pressure:</label>
+        <input type="number" step="0.01" id="pres" name="pres" required value="{{data['pres'] if data }}"><br><br>
+      </div>
+      <div>
+        <label for="skin">Skin Thickness:</label>
+        <input type="number" step="0.01" id="skin" name="skin" required value="{{data['skin'] if data }}"><br><br>
+      </div>
+      <div>
+        <label for="test">Insulin Test:</label>
+        <input type="number" step="0.01" id="test" name="test" required value="{{data['test'] if data }}"><br><br>
+      </div>
+      <div>
+        <label for="mass">BMI:</label>
+        <input type="number" step="0.01" id="mass" name="mass" required value="{{data['mass'] if data }}"><br><br>
+      </div>
+      <div>
+        <label for="pedi">Diabetes Pedigree Function:</label>
+        <input type="number" step="0.01" step="0.001" id="pedi" name="pedi" required value="{{data['pedi'] if data }}"><br><br>
+      </div>
+      <div>
+        <label for="age">Age:</label>
+        <input type="number" step="0.01" id="age" name="age" required value="{{data['age'] if data }}"><br><br>
+      </div>
+      <div class="div">
+        <label for="model">Model</label>
+        <select name="model" id="model">
+          <option value="KNN" {{'selected' if data['model'] == 'KNN'}}>KNN</option>
+          <option value="SVM" {{'selected' if data['model'] == 'SVM'}}>SVM</option>
+          <option value="DT" {{'selected' if data['model'] == 'DT'}}>Decision Tree</option>
+        </select>
+      </div>
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Predict">
+    </form>
+
+
+</body>
+
+</html>
